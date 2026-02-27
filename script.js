@@ -1,51 +1,53 @@
-const options = document.querySelectorAll('.option');
+const questions = document.querySelectorAll('.section .options');
 const progressBar = document.getElementById('progressBar');
 const surveyForm = document.getElementById('surveyForm');
 const thankYou = document.getElementById('thankYou');
 
-let answers = {};
-let questionIndex = 0;
-
-// Map each question's options
-const questions = document.querySelectorAll('.section .options');
+let answers = {}; // store answers per question
+let answeredQuestions = new Set(); // track which questions have at least 1 answer
 
 questions.forEach((sectionOptions, qIndex) => {
   const btns = sectionOptions.querySelectorAll('.option');
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
+      // Record answer
       answers[`Q${qIndex+1}`] = btn.textContent;
-      questionIndex++;
+
+      // Update selection UI
+      btns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      // Track answered questions
+      answeredQuestions.add(qIndex);
+
+      // Update progress bar
       updateProgress();
-      // Optional: highlight selected
-      btns.forEach(b=>b.style.opacity=0.5);
-      btn.style.opacity=1;
     });
   });
 });
 
 function updateProgress() {
-  let percent = (questionIndex / questions.length) * 100;
+  let percent = (answeredQuestions.size / questions.length) * 100;
   progressBar.style.width = percent + '%';
 }
 
 surveyForm.addEventListener('submit', e => {
   e.preventDefault();
-  const name = document.getElementById('name').value;
-  const section = document.getElementById('section').value;
-  if(!name || !section) {
+  const name = document.getElementById('name').value.trim();
+  const section = document.getElementById('section').value.trim();
+  if (!name || !section) {
     alert('Please fill your name and section.');
     return;
   }
 
-  // For now, log the data
   const data = { name, section, ...answers };
   console.log('Submitted:', data);
 
-  // Show confetti / thank you
+  // Show thank you
   surveyForm.classList.add('hidden');
   thankYou.classList.remove('hidden');
 
-  // Optional confetti (lightweight)
+  // Confetti effect
   confetti();
 });
 
