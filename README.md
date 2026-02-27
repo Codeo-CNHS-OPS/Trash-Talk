@@ -1,4 +1,4 @@
-# Opinify
+# Trash-Talk
 
 # Mini Research: Student Littering Survey
 
