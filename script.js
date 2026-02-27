@@ -3,8 +3,8 @@ const progressBar = document.getElementById('progressBar');
 const surveyForm = document.getElementById('surveyForm');
 const thankYou = document.getElementById('thankYou');
 
-let answers = {}; // store answers per question
-let answeredQuestions = new Set(); // track which questions have at least 1 answer
+let answers = {};
+let answeredQuestions = new Set();
 
 questions.forEach((sectionOptions, qIndex) => {
   const btns = sectionOptions.querySelectorAll('.option');
@@ -20,8 +20,9 @@ questions.forEach((sectionOptions, qIndex) => {
       // Track answered questions
       answeredQuestions.add(qIndex);
 
-      // Update progress bar
+      // Animate progress bar "dopamine effect"
       updateProgress();
+      animateProgressGlow();
     });
   });
 });
@@ -29,6 +30,13 @@ questions.forEach((sectionOptions, qIndex) => {
 function updateProgress() {
   let percent = (answeredQuestions.size / questions.length) * 100;
   progressBar.style.width = percent + '%';
+}
+
+function animateProgressGlow() {
+  progressBar.style.boxShadow = "0 0 25px rgba(90,90,255,0.7)";
+  setTimeout(() => {
+    progressBar.style.boxShadow = "0 0 15px rgba(90,90,255,0.5)";
+  }, 200);
 }
 
 surveyForm.addEventListener('submit', e => {
@@ -43,15 +51,13 @@ surveyForm.addEventListener('submit', e => {
   const data = { name, section, ...answers };
   console.log('Submitted:', data);
 
-  // Show thank you
   surveyForm.classList.add('hidden');
   thankYou.classList.remove('hidden');
 
-  // Confetti effect
   confetti();
 });
 
-// Tiny confetti effect
+// Dopamine confetti effect
 function confetti(){
   const confettiContainer = document.createElement('div');
   confettiContainer.style.position = 'fixed';
@@ -62,12 +68,14 @@ function confetti(){
   confettiContainer.style.pointerEvents = 'none';
   document.body.appendChild(confettiContainer);
 
-  for(let i=0;i<50;i++){
+  for(let i=0;i<60;i++){
     const div = document.createElement('div');
     div.style.position = 'absolute';
-    div.style.width = '8px';
-    div.style.height = '8px';
-    div.style.background = `hsl(${Math.random()*360}, 70%, 50%)`;
+    div.style.width = '10px';
+    div.style.height = '10px';
+    // subtle jewel-tone colors for elegant dopamine feel
+    const colors = ['#5a5aff','#aa55ff','#55ffff','#ffaa55','#ff55aa'];
+    div.style.background = colors[Math.floor(Math.random()*colors.length)];
     div.style.left = Math.random()*100 + '%';
     div.style.top = '-10px';
     div.style.borderRadius = '50%';
@@ -80,9 +88,9 @@ function confetti(){
       if(top > window.innerHeight){
         div.remove();
         clearInterval(fall);
-      } else div.style.top = top + Math.random()*5 + 'px';
+      } else div.style.top = top + Math.random()*8 + 'px';
     }, 20);
   }
 
-  setTimeout(()=>confettiContainer.remove(), 3000);
+  setTimeout(()=>confettiContainer.remove(), 3500);
 }
