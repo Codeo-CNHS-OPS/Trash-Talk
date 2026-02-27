@@ -3,7 +3,7 @@
 # Mini Research: Student Littering Survey
 
 ## Overview
-This is a web-based survey created to study littering habits among grade 10 students at Carmona National High School. The site collects student opinions and behaviors related to littering in school.
+This is a web-based survey created to study littering habits among grade 8 students at Carmona National High School. The site collects student opinions and behaviors related to littering in school.
 
 ## Purpose
 The goal of this mini research project is to understand students' littering habits and raise awareness to encourage a cleaner school environment.
