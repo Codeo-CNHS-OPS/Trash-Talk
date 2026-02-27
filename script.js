@@ -51,16 +51,21 @@ surveyForm.addEventListener('submit', e => {
     sectionOptions.parentElement.classList.remove('unanswered');
   });
 
-  // Check if name and section are filled
-  if (!name || !sectionInput) {
-    warning.textContent = 'Please fill your name and section.';
+  // --- Name Validation ---
+  const namePattern = /^[a-zA-Z\s,]+$/; // letters, spaces, commas only
+  if(name.length < 2 || name.length > 30 || !namePattern.test(name)){
+    warning.textContent = 'Name must be 2–30 letters and can include commas only.';
     warning.classList.remove('hidden');
     warning.classList.add('visible');
+    return;
+  }
 
-    setTimeout(() => {
-      warning.classList.remove('visible');
-      warning.classList.add('hidden');
-    }, 3000);
+  // --- Section Validation ---
+  const sectionPattern = /^8\s*-\s*[a-zA-Z\s]+$/; // 8 - SectionName
+  if(!sectionPattern.test(sectionInput)){
+    warning.textContent = 'Section must be in format "8 - SectionName" (e.g., 8 - Rambutan).';
+    warning.classList.remove('hidden');
+    warning.classList.add('visible');
     return;
   }
 
@@ -86,7 +91,7 @@ surveyForm.addEventListener('submit', e => {
     return;
   }
 
-  // If everything is filled, submit data
+  // All validations passed → submit data
   const data = { name, section: sectionInput, ...answers };
   console.log('Submitted:', data);
 
