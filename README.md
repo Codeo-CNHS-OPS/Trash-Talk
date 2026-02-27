@@ -20,4 +20,4 @@ The goal of this mini research project is to understand students' littering habi
 This project is licensed under the [MIT License](LICENSE).
 
 ## Author
-Cody T. Fernandez — Grade 10, Tangile
+Cody T. Fernandez — Grade 10, Tangile (2026)
