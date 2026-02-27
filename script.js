@@ -43,10 +43,20 @@ surveyForm.addEventListener('submit', e => {
   e.preventDefault();
   const name = document.getElementById('name').value.trim();
   const section = document.getElementById('section').value.trim();
-  if (!name || !section) {
-    alert('Please fill your name and section.');
-    return;
-  }
+if (!name || !section) {
+  const warning = document.getElementById('warningMsg');
+  warning.textContent = 'Please fill your name and section.';
+  warning.classList.remove('hidden');
+  warning.classList.add('visible');
+
+  // Optional: hide again after 3 seconds
+  setTimeout(() => {
+    warning.classList.remove('visible');
+    warning.classList.add('hidden');
+  }, 3000);
+
+  return;
+}
 
   const data = { name, section, ...answers };
   console.log('Submitted:', data);
