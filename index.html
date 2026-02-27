@@ -3,13 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Opinify</title>
-  <link rel="stylesheet" href="style.css"> <!-- links your CSS -->
+  <title>Opinify - School Waste Survey</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  
-  <!-- Your survey will go here -->
+  <div class="container">
+    <h1>Opinify</h1>
+    <p class="subtitle">Quick Survey on School Waste Rules</p>
 
-  <script src="script.js" defer></script> <!-- links your JS -->
+    <form id="surveyForm">
+      <div class="section">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" required placeholder="Type your name">
+      </div>
+
+      <div class="section">
+        <label for="section">Section:</label>
+        <input type="text" id="section" required placeholder="e.g. 10-Tangile">
+      </div>
+
+      <!-- Q1 -->
+      <div class="section">
+        <p>1. Are you aware of the school’s rules on proper waste disposal?</p>
+        <div class="options">
+          <button type="button" class="option">Yes</button>
+          <button type="button" class="option">Somewhat</button>
+          <button type="button" class="option">No</button>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="section">
+        <p>2. How often do you throw trash in the proper bins at school?</p>
+        <div class="options">
+          <button type="button" class="option">Always</button>
+          <button type="button" class="option">Often</button>
+          <button type="button" class="option">Sometimes</button>
+          <button type="button" class="option">Rarely</button>
+          <button type="button" class="option">Never</button>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="section">
+        <p>3. Do you remind others or yourself to follow proper waste disposal rules?</p>
+        <div class="options">
+          <button type="button" class="option">Always</button>
+          <button type="button" class="option">Often</button>
+          <button type="button" class="option">Sometimes</button>
+          <button type="button" class="option">Rarely</button>
+          <button type="button" class="option">Never</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <button type="submit" id="submitBtn">Submit</button>
+      </div>
+    </form>
+
+    <div id="thankYou" class="hidden">
+      <h2>Thank you for submitting!</h2>
+      <p class="confetti">🎉🎉🎉</p>
+      <p>Your responses have been recorded.</p>
+    </div>
+
+    <div id="progressContainer">
+      <div id="progressBar"></div>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
