@@ -196,3 +196,46 @@ input[type="text"]:focus {
     opacity: 1;
   }
 }
+
+/* Goal progress */
+#goalProgressContainer {
+  background: #333;
+  border-radius: 20px;
+  height: 14px;
+  width: 100%;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+#goalProgressBar {
+  height: 100%;
+  width: 0%;
+  background: #55ffaa;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 15px rgba(85,255,170,0.6);
+}
+
+.goalBox {
+  margin-top: 15px;
+}
+
+.shareBox {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#copyBtn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: #444;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#copyBtn:hover {
+  transform: scale(1.05);
+  background: #555;
+}
