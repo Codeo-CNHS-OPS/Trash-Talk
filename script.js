@@ -127,6 +127,42 @@ surveyForm.addEventListener('submit', async e => {
   fetchAnswerCounts();
 });
 
+// Example post-submit percentages
+async function showResultsSummary() {
+  try {
+    const res = await fetch(SCRIPT_URL);
+    const data = await res.json();
+    const totalResponses = Object.values(data['Q1']).reduce((a,b)=>a+b,0);
+
+    questions.forEach((section, index) => {
+      const qKey = `Q${index+1}`;
+      const summaryEl = document.getElementById(`${qKey}-summary`);
+      const questionText = section.parentElement.querySelector('p').textContent;
+      const userAnswer = answers[qKey];
+      const counts = data[qKey];
+      const total = Object.values(counts).reduce((a,b)=>a+b,0);
+
+      let html = `<h3>${questionText}</h3>`;
+      Object.entries(counts).forEach(([option, count]) => {
+        const percent = total ? Math.round((count/total)*100) : 0;
+        const highlight = option === userAnswer ? 'style="background:#ffaa55"' : '';
+        html += `
+          <div>${option}</div>
+          <div class="result-bar">
+            <div class="result-fill" style="width:${percent}%;${highlight}">${percent}%</div>
+          </div>
+        `;
+      });
+      summaryEl.innerHTML = html;
+    });
+
+    document.getElementById('resultsSummary').classList.remove('hidden');
+  } catch(err) {
+    console.error('Failed to fetch results summary:', err);
+  }
+}
+showResultsSummary();
+
 // ================= CONFETTI =================
 function confetti() {
   const container = document.createElement('div');
