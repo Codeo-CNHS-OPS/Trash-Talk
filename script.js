@@ -8,23 +8,6 @@ let answeredQuestions = new Set();
 const OFFLINE_KEY = "trash-talk_offline_responses";
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQkx8vyEs7mO-orrxUSd5VJuLx3cqfoLzOJQ88kvdqpL8Lo2eZ5TuYrU23C49oLlgb-w/exec"; 
 
-// ================= FETCH ANSWER COUNTS =================
-async function fetchAnswerCounts() {
-  try {
-    const res = await fetch(SCRIPT_URL);
-    const data = await res.json();
-    questions.forEach((sectionOptions, qIndex) => {
-      const qKey = `Q${qIndex + 1}`;
-      sectionOptions.querySelectorAll('.option').forEach(optionEl => {
-        const text = optionEl.childNodes[0].textContent.trim();
-        const count = data[qKey][text] || 0;
-        optionEl.querySelector('.badge').textContent = count;
-      });
-    });
-  } catch (err) {
-    console.error("Failed to fetch live counts:", err);
-  }
-}
 
 // ================= TRACK QUESTION SELECTION =================
 questions.forEach((sectionOptions, qIndex) => {
@@ -124,19 +107,18 @@ surveyForm.addEventListener('submit', async e => {
   surveyForm.classList.add('hidden');
   thankYou.classList.remove('hidden');
   confetti();
-
-  fetchAnswerCounts();
-  showResultsSummary(); // show Dispatch-style percentages
+  showResultsSummary();
 });
 
-// ================= POST-SUBMIT PERCENTAGE SUMMARY =================
+// Example post-submit percentages
 async function showResultsSummary() {
   try {
     const res = await fetch(SCRIPT_URL);
     const data = await res.json();
+    const totalResponses = Object.values(data['Q1']).reduce((a,b)=>a+b,0);
 
     questions.forEach((section, index) => {
-      const qKey = `Q${index + 1}`;
+      const qKey = `Q${index+1}`;
       const summaryEl = document.getElementById(`${qKey}-summary`);
       const questionText = section.parentElement.querySelector('p').textContent;
       const userAnswer = answers[qKey];
@@ -144,18 +126,16 @@ async function showResultsSummary() {
       const total = Object.values(counts).reduce((a,b)=>a+b,0);
 
       let html = `<h3>${questionText}</h3>`;
-
       Object.entries(counts).forEach(([option, count]) => {
         const percent = total ? Math.round((count/total)*100) : 0;
-        const isUser = option === userAnswer;
+        const highlight = option === userAnswer ? 'style="background:#ffaa55"' : '';
         html += `
-          <div class="option-summary ${isUser ? 'highlight' : ''}">
-            ${option} — ${percent}%
-            ${isUser ? `<div class="caption">${percent}% of people chose the same answer as you</div>` : ''}
+          <div>${option}</div>
+          <div class="result-bar">
+            <div class="result-fill" style="width:${percent}%;${highlight}">${percent}%</div>
           </div>
         `;
       });
-
       summaryEl.innerHTML = html;
     });
 
@@ -194,6 +174,3 @@ function confetti() {
   }
   setTimeout(() => container.remove(), 5000);
 }
-
-// ================= INIT =================
-fetchAnswerCounts();
