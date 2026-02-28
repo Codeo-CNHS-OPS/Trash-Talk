@@ -5,7 +5,7 @@ const thankYou = document.getElementById('thankYou');
 
 let answers = {};
 let answeredQuestions = new Set();
-const OFFLINE_KEY = "Trash-Talk_Survey";
+const OFFLINE_KEY = "trash-talk_offline_responses";
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQkx8vyEs7mO-orrxUSd5VJuLx3cqfoLzOJQ88kvdqpL8Lo2eZ5TuYrU23C49oLlgb-w/exec"; 
 
 // ================= TRACK QUESTION SELECTION =================
@@ -122,9 +122,11 @@ async function showResultsSummary() {
       const questionText = section.parentElement.querySelector('p').textContent;
       const userAnswer = answers[qKey];
       const counts = data[qKey];
+      // Optimistically add user's own answer in case the sheet hasn't processed it yet
+      counts[userAnswer] = (counts[userAnswer] || 0) + 1;
       const total = Object.values(counts).reduce((a,b)=>a+b,0);
 
-      const userCount = counts[userAnswer] || 0;
+      const userCount = counts[userAnswer];
       const percent = total ? Math.round((userCount / total) * 100) : 0;
       summaryEl.innerHTML = `
         <h3>${questionText}</h3>
