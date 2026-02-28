@@ -178,8 +178,6 @@ input[type="text"]:focus {
   color: #ccc;
 }
 
-
-
 #resultsSummary {
   margin-top: 20px;
   padding: 20px;
@@ -195,6 +193,21 @@ input[type="text"]:focus {
 .question-summary h3 {
   font-size: 1.1em;
   margin-bottom: 5px;
+}
+
+.option-summary {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.option-summary.highlight {
+  color: #ffaa55;
+}
+
+.caption {
+  font-size: 0.85em;
+  color: #ccc;
+  margin-left: 10px;
 }
 
 .result-bar {
@@ -217,8 +230,6 @@ input[type="text"]:focus {
   font-size: 0.9em;
   line-height: 20px;
 }
-
-
 
 @media (max-width: 380px) {
   .option {
