@@ -124,19 +124,19 @@ surveyForm.addEventListener('submit', async e => {
   surveyForm.classList.add('hidden');
   thankYou.classList.remove('hidden');
   confetti();
+
   fetchAnswerCounts();
-  showResultsSummary();
+  showResultsSummary(); // show Dispatch-style percentages
 });
 
-// Example post-submit percentages
+// ================= POST-SUBMIT PERCENTAGE SUMMARY =================
 async function showResultsSummary() {
   try {
     const res = await fetch(SCRIPT_URL);
     const data = await res.json();
-    const totalResponses = Object.values(data['Q1']).reduce((a,b)=>a+b,0);
 
     questions.forEach((section, index) => {
-      const qKey = `Q${index+1}`;
+      const qKey = `Q${index + 1}`;
       const summaryEl = document.getElementById(`${qKey}-summary`);
       const questionText = section.parentElement.querySelector('p').textContent;
       const userAnswer = answers[qKey];
@@ -144,16 +144,18 @@ async function showResultsSummary() {
       const total = Object.values(counts).reduce((a,b)=>a+b,0);
 
       let html = `<h3>${questionText}</h3>`;
+
       Object.entries(counts).forEach(([option, count]) => {
         const percent = total ? Math.round((count/total)*100) : 0;
-        const highlight = option === userAnswer ? 'style="background:#ffaa55"' : '';
+        const isUser = option === userAnswer;
         html += `
-          <div>${option}</div>
-          <div class="result-bar">
-            <div class="result-fill" style="width:${percent}%;${highlight}">${percent}%</div>
+          <div class="option-summary ${isUser ? 'highlight' : ''}">
+            ${option} — ${percent}%
+            ${isUser ? `<div class="caption">${percent}% of people chose the same answer as you</div>` : ''}
           </div>
         `;
       });
+
       summaryEl.innerHTML = html;
     });
 
@@ -195,3 +197,5 @@ function confetti() {
 
 // ================= INIT =================
 fetchAnswerCounts();
+
+      
