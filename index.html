@@ -11,84 +11,70 @@
 
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <div class="container">
+<div class="container">
 
-    <h1>Trash-Talk</h1>
-    <p class="subtitle">School Environmental Snapshot</p>
+  <h1>Trash-Talk</h1>
+  <p class="subtitle">School Environmental Snapshot</p>
 
-    <!-- ================= SURVEY FORM ================= -->
-    <form id="surveyForm">
-
-      <label>Name:</label>
-      <input type="text" name="name" required>
-
-      <label>Section:</label>
-      <input type="text" name="section" required>
-
-      <label>Q1: Does your classroom practice waste segregation?</label>
-      <select name="Q1" required>
-        <option value="">Select</option>
-        <option value="Yes">Yes</option>
-        <option value="Sometimes">Sometimes</option>
-        <option value="No">No</option>
-      </select>
-
-      <label>Q2: Are trash bins accessible in your area?</label>
-      <select name="Q2" required>
-        <option value="">Select</option>
-        <option value="Yes">Yes</option>
-        <option value="Some Areas">Some Areas</option>
-        <option value="No">No</option>
-      </select>
-
-      <label>Q3: Do students actively participate in keeping the school clean?</label>
-      <select name="Q3" required>
-        <option value="">Select</option>
-        <option value="Yes">Yes</option>
-        <option value="Sometimes">Sometimes</option>
-        <option value="No">No</option>
-      </select>
-
-      <button type="submit">Submit</button>
-    </form>
-
-    <!-- ================= THANK YOU ================= -->
-    <div id="thankYou" class="hidden">
-      <h2>Thank You!</h2>
-      <p>Your response has been recorded.</p>
+  <form id="surveyForm">
+    <div class="section">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" placeholder="Last Name, First Name (E.g. Hernandez, Juan)">
     </div>
 
-    <!-- ================= SHARE + GOAL SECTION ================= -->
-    <div id="shareSection" class="hidden">
-      <h3>Help Me Reach 250 Students</h3>
-      <p>
-        I'm a solo researcher working to collect responses from 250 Grade 8 students.
-        Your participation makes a difference.
-      </p>
+    <div class="section">
+      <label for="section">Grade & Section</label>
+      <input type="text" id="section" placeholder="E.g. 8 - Rambutan">
+    </div>
 
-      <div class="goalBox">
-        <p><strong><span id="currentCount">0</span> / 250</strong> responses collected</p>
-        <div id="goalProgressContainer">
-          <div id="goalProgressBar"></div>
-        </div>
-      </div>
-
-      <div class="shareBox">
-        <p id="surveyLinkText"></p>
-        <button id="copyBtn">Copy Link</button>
-        <div id="qrcode"></div>
+    <div class="section">
+      <p>Q1: Are you aware of the school’s rules on proper waste disposal?</p>
+      <div class="options">
+        <div class="option">Yes <span class="badge">0</span></div>
+        <div class="option">Somewhat <span class="badge">0</span></div>
+        <div class="option">No <span class="badge">0</span></div>
       </div>
     </div>
 
+    <div class="section">
+      <p>Q2: How often do you throw trash in the proper bins at school?</p>
+      <div class="options">
+        <div class="option">Always <span class="badge">0</span></div>
+        <div class="option">Often <span class="badge">0</span></div>
+        <div class="option">Sometimes <span class="badge">0</span></div>
+        <div class="option">Rarely <span class="badge">0</span></div>
+        <div class="option">Never <span class="badge">0</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>Q3: Do you remind others or yourself to follow proper waste disposal rules?</p>
+      <div class="options">
+        <div class="option">Always <span class="badge">0</span></div>
+        <div class="option">Often <span class="badge">0</span></div>
+        <div class="option">Sometimes <span class="badge">0</span></div>
+        <div class="option">Rarely <span class="badge">0</span></div>
+        <div class="option">Never <span class="badge">0</span></div>
+      </div>
+    </div>
+
+    <p id="warningMsg" class="hidden"></p>
+    <button type="submit" id="submitBtn">Submit</button>
+
+    <div id="progressContainer">
+      <div id="progressBar"></div>
+    </div>
+  </form>
+
+  <div id="thankYou" class="hidden">
+    <h2>Salamat po!</h2>
+    <p>Your responses are very helpful for my research.</p>
+    <p>Answers have been successfully recorded.</p>
   </div>
 
-  <!-- QR Code Library (MUST load before script.js) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</div>
 
-  <!-- Main Script -->
-  <script src="script.js"></script>
-
+<script src="script.js"></script>
 </body>
 </html>
