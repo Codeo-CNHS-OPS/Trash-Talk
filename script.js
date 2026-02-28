@@ -5,25 +5,22 @@ const thankYou = document.getElementById('thankYou');
 
 let answers = {};
 let answeredQuestions = new Set();
-const OFFLINE_KEY = "trash-talk_offline_responses";
+const OFFLINE_KEY = "Trash-Talk_Survey";
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQkx8vyEs7mO-orrxUSd5VJuLx3cqfoLzOJQ88kvdqpL8Lo2eZ5TuYrU23C49oLlgb-w/exec";
 
-// Track question selections
+// ================= TRACK QUESTION SELECTIONS =================
 questions.forEach((sectionOptions, qIndex) => {
   const btns = sectionOptions.querySelectorAll('.option');
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Record answer
+
       answers[`Q${qIndex+1}`] = btn.textContent;
 
-      // Update selection UI
       btns.forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
 
-      // Track answered questions
       answeredQuestions.add(qIndex);
 
-      // Animate progress bar "dopamine effect"
       updateProgress();
       animateProgressGlow();
     });
@@ -42,14 +39,13 @@ function animateProgressGlow() {
   }, 200);
 }
 
-// Save a single response locally
+// ================= OFFLINE STORAGE =================
 function saveLocally(data) {
   let stored = JSON.parse(localStorage.getItem(OFFLINE_KEY) || "[]");
   stored.push(data);
   localStorage.setItem(OFFLINE_KEY, JSON.stringify(stored));
 }
 
-// Send a single response to Google Sheets
 function sendToGoogleSheet(data) {
   return fetch(SCRIPT_URL, {
     method: "POST",
@@ -57,28 +53,58 @@ function sendToGoogleSheet(data) {
   }).then(res => res.json());
 }
 
-// Attempt to send all offline responses
 function sendAllStoredResponses() {
   let stored = JSON.parse(localStorage.getItem(OFFLINE_KEY) || "[]");
   if(stored.length === 0) return;
 
   stored.forEach((data, index) => {
     sendToGoogleSheet(data).then(() => {
-      stored[index] = null; // mark as sent
+      stored[index] = null;
     }).catch(err => console.error("Offline submission failed:", err));
   });
 
-  // Remove sent items
   stored = stored.filter(d => d !== null);
   localStorage.setItem(OFFLINE_KEY, JSON.stringify(stored));
 }
 
-// Auto-sync when online
 window.addEventListener('online', () => {
   sendAllStoredResponses();
 });
 
-// Form submission
+// ================= SHARE + GOAL SYSTEM =================
+function showShareSection(total) {
+  const shareSection = document.getElementById('shareSection');
+  const currentCount = document.getElementById('currentCount');
+  const goalProgressBar = document.getElementById('goalProgressBar');
+  const surveyLinkText = document.getElementById('surveyLinkText');
+  const copyBtn = document.getElementById('copyBtn');
+
+  const GOAL = 250;
+
+  shareSection.classList.remove('hidden');
+
+  currentCount.textContent = total;
+
+  let percent = Math.min((total / GOAL) * 100, 100);
+  goalProgressBar.style.width = percent + '%';
+
+  const link = window.location.href;
+  surveyLinkText.textContent = link;
+
+  copyBtn.onclick = () => {
+    navigator.clipboard.writeText(link);
+    copyBtn.textContent = "Copied!";
+    setTimeout(() => copyBtn.textContent = "Copy Link", 2000);
+  };
+
+  new QRCode(document.getElementById("qrcode"), {
+    text: link,
+    width: 120,
+    height: 120,
+  });
+}
+
+// ================= FORM SUBMISSION =================
 surveyForm.addEventListener('submit', e => {
   e.preventDefault();
 
@@ -86,10 +112,10 @@ surveyForm.addEventListener('submit', e => {
   const sectionInput = document.getElementById('section').value.trim();
   const warning = document.getElementById('warningMsg');
 
-  // Reset highlights
-  questions.forEach(sectionOptions => sectionOptions.parentElement.classList.remove('unanswered'));
+  questions.forEach(sectionOptions => 
+    sectionOptions.parentElement.classList.remove('unanswered')
+  );
 
-  // --- Name Validation ---
   const namePattern = /^[a-zA-Z\s,]+$/;
   if(name.length < 2 || name.length > 30 || !namePattern.test(name)){
     warning.textContent = 'Name must be 2–30 letters and can include commas only.';
@@ -98,7 +124,6 @@ surveyForm.addEventListener('submit', e => {
     return;
   }
 
-  // --- Section Validation ---
   const sectionPattern = /^8\s*-\s*[a-zA-Z\s]+$/;
   if(!sectionPattern.test(sectionInput)){
     warning.textContent = 'Section must be in format "8 - SectionName" (e.g., 8 - Rambutan).';
@@ -107,7 +132,6 @@ surveyForm.addEventListener('submit', e => {
     return;
   }
 
-  // Check if all questions are answered
   let allAnswered = true;
   questions.forEach((sectionOptions, index) => {
     if (!answeredQuestions.has(index)) {
@@ -132,12 +156,21 @@ surveyForm.addEventListener('submit', e => {
   if(navigator.onLine){
     sendToGoogleSheet(data).then(resp => {
       console.log("Submitted:", resp);
+
+      if(resp.totalResponses){
+        showShareSection(resp.totalResponses);
+      } else {
+        showShareSection(0);
+      }
+
     }).catch(err => {
       console.error("Online submission failed, saving offline.", err);
       saveLocally(data);
+      showShareSection(0);
     });
   } else {
     saveLocally(data);
+    showShareSection(0);
   }
 
   surveyForm.classList.add('hidden');
@@ -145,7 +178,7 @@ surveyForm.addEventListener('submit', e => {
   confetti();
 });
 
-// Dopamine confetti effect
+// ================= CONFETTI =================
 function confetti() {
   const confettiContainer = document.createElement('div');
   confettiContainer.style.position = 'fixed';
@@ -162,7 +195,6 @@ function confetti() {
   for (let i = 0; i < 60; i++) {
     setTimeout(() => {
       const piece = document.createElement('div');
-
       piece.style.position = 'absolute';
       piece.style.width = '10px';
       piece.style.height = '10px';
@@ -172,7 +204,6 @@ function confetti() {
       piece.style.borderRadius = '50%';
       piece.style.opacity = 0;
 
-      // Random animation duration
       const duration = 3 + Math.random() * 2;
 
       piece.style.animation = `
@@ -182,15 +213,13 @@ function confetti() {
 
       confettiContainer.appendChild(piece);
 
-      // Remove piece after animation
       setTimeout(() => {
         piece.remove();
       }, duration * 1000);
 
-    }, i * 30); // stagger creation
+    }, i * 30);
   }
 
-  // Remove container after everything finishes
   setTimeout(() => {
     confettiContainer.remove();
   }, 5000);
