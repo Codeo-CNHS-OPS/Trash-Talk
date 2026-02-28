@@ -85,6 +85,16 @@ input[type="text"]:focus {
   color: #f5f5f5;
   text-align: center;
   transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  position: relative;
+}
+
+.option .badge {
+  background: #55ffaa;
+  color: #000;
+  font-size: 0.8em;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 5px;
 }
 
 .option:hover, .option.selected {
@@ -93,7 +103,6 @@ input[type="text"]:focus {
   background: #3a3a4a;
 }
 
-/* Tap effect for mobile */
 .option:active {
   transform: scale(1.08);
   box-shadow: 0 6px 25px rgba(255,255,255,0.3);
@@ -141,7 +150,7 @@ input[type="text"]:focus {
 }
 
 #warningMsg {
-  color: #ff5555; /* elegant red */
+  color: #ff5555;
   font-weight: bold;
   margin-bottom: 10px;
   text-align: center;
@@ -153,7 +162,6 @@ input[type="text"]:focus {
   opacity: 1;
 }
 
-/* Thank you screen */
 #thankYou {
   text-align: center;
   padding: 20px;
@@ -170,14 +178,12 @@ input[type="text"]:focus {
   color: #ccc;
 }
 
-/* Mobile adjustments */
 @media (max-width: 380px) {
   .option {
     flex: 1 1 100%;
   }
 }
 
-/* Highlight unanswered question sections */
 .section.unanswered {
   border: 2px solid #ff5555;
   border-radius: 15px;
@@ -186,56 +192,7 @@ input[type="text"]:focus {
 }
 
 @keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(720deg);
-  }
+  to { transform: translateY(110vh) rotate(720deg); }
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-/* Goal progress */
-#goalProgressContainer {
-  background: #333;
-  border-radius: 20px;
-  height: 14px;
-  width: 100%;
-  margin-top: 10px;
-  overflow: hidden;
-}
-
-#goalProgressBar {
-  height: 100%;
-  width: 0%;
-  background: #55ffaa;
-  transition: width 0.5s ease;
-  box-shadow: 0 0 15px rgba(85,255,170,0.6);
-}
-
-.goalBox {
-  margin-top: 15px;
-}
-
-.shareBox {
-  margin-top: 20px;
-  text-align: center;
-}
-
-#copyBtn {
-  margin-top: 10px;
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: none;
-  background: #444;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-#copyBtn:hover {
-  transform: scale(1.05);
-  background: #555;
-}
+@keyframes fadeIn { to { opacity: 1; } }
