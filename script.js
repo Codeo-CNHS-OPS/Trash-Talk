@@ -73,9 +73,9 @@ surveyForm.addEventListener('submit', async e => {
     return;
   }
 
-  const sectionPattern = /^8\s*-\s*[a-zA-Z\s]+$/;
+  const sectionPattern = /^10\s*-\s*[a-zA-Z\s]+$/;
   if (!sectionPattern.test(sectionInput)) {
-    warning.textContent = 'Section must be in format "8 - SectionName" (e.g., 8 - Rambutan).';
+    warning.textContent = 'Section must be in format "10 - SectionName" (e.g., 10 - Rambutan).';
     warning.classList.remove('hidden');
     warning.classList.add('visible');
     return;
@@ -206,8 +206,21 @@ async function updateSharingProgress() {
 }
 
 function setSharingCount(count) {
-  document.getElementById('responseCount').textContent = count;
   const percent = Math.min((count / GOAL) * 100, 100);
+  // Count-up animation
+  const el = document.getElementById('responseCount');
+  const start = parseInt(el.textContent) || 0;
+  const duration = 1200;
+  const startTime = performance.now();
+  function tick(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(start + (count - start) * ease);
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+  // Bar animation
   requestAnimationFrame(() => {
     setTimeout(() => {
       document.getElementById('sharingBar').style.width = percent + '%';
@@ -228,10 +241,10 @@ function expandSharingStation(totalAfterSubmit) {
 function copyLink() {
   navigator.clipboard.writeText(SITE_URL).then(() => {
     const btn = document.getElementById('copyLinkBtn');
-    btn.textContent = '✅ Copied!';
+    btn.textContent = 'Copied!';
     btn.classList.add('copied');
     setTimeout(() => {
-      btn.textContent = '🔗 Copy Link';
+      btn.textContent = 'Copy Link';
       btn.classList.remove('copied');
     }, 2500);
   });
