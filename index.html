@@ -14,8 +14,46 @@
 <body>
 <div class="container">
 
-  <h1>Trash-Talk</h1>
-  <p class="subtitle">Waste Disposal Practices: A Snapshot for Grade 10</p>
+  <!-- ===== INTRO SCREEN ===== -->
+  <div id="introScreen">
+    <h1>Trash-Talk</h1>
+    <p class="subtitle">Waste Disposal Practices: A Snapshot for Grade 10</p>
+
+    <div class="intro-card" id="intro-purpose">
+      <div class="intro-icon">01</div>
+      <div class="intro-body">
+        <h3>Purpose</h3>
+        <p>To find out the knowledge and practice of waste disposal among Grade 10 students.</p>
+      </div>
+    </div>
+
+    <div class="intro-card" id="intro-instructions">
+      <div class="intro-icon">02</div>
+      <div class="intro-body">
+        <h3>Instructions</h3>
+        <ol>
+          <li>Answer all questions honestly.</li>
+          <li>Press/click the option that best reflects you.</li>
+          <li>There are no right or wrong answers.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="intro-card" id="intro-confidentiality">
+      <div class="intro-icon">03</div>
+      <div class="intro-body">
+        <h3>Confidentiality</h3>
+        <p>Your answers are private and will only be used for this study.</p>
+      </div>
+    </div>
+
+    <button id="beginBtn" onclick="beginSurvey()">Begin Survey</button>
+  </div>
+
+  <!-- ===== SURVEY FORM ===== -->
+  <div id="surveyWrapper" class="hidden">
+  <h1 class="form-title">Trash-Talk</h1>
+  <p class="subtitle form-subtitle">Waste Disposal Practices: A Snapshot for Grade 10</p>
 
   <form id="surveyForm">
     <div class="section">
@@ -66,6 +104,7 @@
       <div id="progressBar"></div>
     </div>
   </form>
+  </div><!-- end surveyWrapper -->
 
   <div id="thankYou" class="hidden">
     <h2>Salamat po!</h2>
