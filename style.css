@@ -56,8 +56,6 @@ h1 {
   margin-bottom: 5px;
   color: #f5f5f5;
   text-shadow: 0 0 20px rgba(90, 90, 255, 0.3);
-  opacity: 0;
-  animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
 }
 
 .subtitle {
@@ -65,8 +63,6 @@ h1 {
   margin-bottom: 25px;
   color: #aaa;
   font-weight: 500;
-  opacity: 0;
-  animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
 }
 
 #surveyForm .section {
@@ -342,6 +338,138 @@ input[type="text"]:focus {
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+
+/* ================= INTRO SCREEN ================= */
+#introScreen {
+  opacity: 0;
+  animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
+}
+
+#introScreen h1 {
+  opacity: 1;
+  animation: none;
+}
+
+#introScreen .subtitle {
+  opacity: 1;
+  animation: none;
+  margin-bottom: 22px;
+}
+
+.intro-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  opacity: 0;
+  animation: slideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+#intro-purpose       { animation-delay: 0.18s; }
+#intro-instructions  { animation-delay: 0.28s; }
+#intro-confidentiality { animation-delay: 0.38s; }
+
+.intro-icon {
+  font-size: 0.7em;
+  font-weight: bold;
+  color: #5a5aff;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  margin-top: 4px;
+  opacity: 0.8;
+}
+
+.intro-body h3 {
+  font-size: 0.95em;
+  font-weight: bold;
+  color: #c0c0e0;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.intro-body p,
+.intro-body ol {
+  font-size: 0.92em;
+  color: #aaa;
+  font-weight: normal;
+  line-height: 1.6;
+}
+
+.intro-body ol {
+  padding-left: 16px;
+}
+
+.intro-body ol li {
+  margin-bottom: 3px;
+}
+
+#beginBtn {
+  width: 100%;
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #3a3a6a, #5a5aff);
+  color: #f5f5f5;
+  font-size: 1em;
+  margin-top: 18px;
+  opacity: 0;
+  animation: slideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.48s forwards;
+  transition:
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+#beginBtn:hover {
+  transform: scale(1.04) translateY(-2px);
+  box-shadow: 0 8px 28px rgba(90, 90, 255, 0.4);
+  background: linear-gradient(135deg, #4a4a7a, #7a7aff);
+}
+
+#beginBtn:active {
+  transform: scale(0.97);
+  transition: transform 0.08s ease;
+}
+
+/* Transition animation for screen swap */
+@keyframes fadeSlideOut {
+  to { opacity: 0; transform: translateY(-16px); }
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.slide-out {
+  animation: fadeSlideOut 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+#surveyWrapper {
+  animation: fadeSlideIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 2.2em;
+  margin-bottom: 5px;
+  color: #f5f5f5;
+  text-shadow: 0 0 20px rgba(90, 90, 255, 0.3);
+}
+
+.form-subtitle {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #aaa;
+  font-weight: 500;
 }
 
 /* ================= SHARING STATION ================= */
