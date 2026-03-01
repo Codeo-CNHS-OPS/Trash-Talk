@@ -1,3 +1,14 @@
+// ================= INTRO SCREEN =================
+function beginSurvey() {
+  const intro = document.getElementById('introScreen');
+  const wrapper = document.getElementById('surveyWrapper');
+  intro.classList.add('slide-out');
+  setTimeout(() => {
+    intro.classList.add('hidden');
+    wrapper.classList.remove('hidden');
+  }, 350);
+}
+
 const questions = document.querySelectorAll('.section .options');
 const progressBar = document.getElementById('progressBar');
 const surveyForm = document.getElementById('surveyForm');
