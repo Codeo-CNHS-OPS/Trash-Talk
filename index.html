@@ -81,6 +81,30 @@
     <div class="question-summary" id="Q3-summary"></div>
   </div>
 
+  <div id="sharingStation">
+    <div id="sharingHeader">
+      <span class="sharing-icon">📣</span>
+      <div>
+        <p class="sharing-title">Help my research!</p>
+        <p class="sharing-sub">I'm a solo researcher aiming for <strong>250 responses</strong> within 7 days.</p>
+      </div>
+    </div>
+    <div class="sharing-progress-label">
+      <span id="responseCount">0</span> / 250 responses
+    </div>
+    <div class="sharing-bar-track">
+      <div id="sharingBar"></div>
+    </div>
+    <div id="sharingActions" class="hidden">
+      <p class="sharing-cta">Every share counts — help spread the word!</p>
+      <button id="copyLinkBtn" onclick="copyLink()">🔗 Copy Link</button>
+      <div id="qrContainer">
+        <p class="qr-label">Or scan to open on another device</p>
+        <img id="qrCode" src="" alt="QR Code">
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script src="script.js"></script>
