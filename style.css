@@ -10,16 +10,16 @@
 body {
   background: linear-gradient(
     300deg,
-    #0d0d1a,
-    #1a1a2e,
-    #16213e,
-    #1f1f3a,
-    #2a1a3a,
-    #1a2a3a
+    #080f09,
+    #0c160d,
+    #0e1a0f,
+    #111d10,
+    #131f0f,
+    #0f1a0e
   );
   background-size: 400% 400%;
   animation: gradientShift 12s ease infinite;
-  color: #f5f5f5;
+  color: #f0f5f0;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -34,7 +34,7 @@ body {
 
 /* ================= CONTAINER ================= */
 .container {
-  background: rgba(30, 30, 40, 0.88);
+  background: rgba(12, 22, 12, 0.90);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 25px;
@@ -54,14 +54,14 @@ h1 {
   text-align: center;
   font-size: 2.2em;
   margin-bottom: 5px;
-  color: #f5f5f5;
-  text-shadow: 0 0 20px rgba(90, 90, 255, 0.3);
+  color: #f0f5f0;
+  text-shadow: 0 0 20px rgba(45, 184, 101, 0.3);
 }
 
 .subtitle {
   text-align: center;
   margin-bottom: 25px;
-  color: #aaa;
+  color: #8aaa8a;
   font-weight: 500;
 }
 
@@ -94,18 +94,18 @@ input[type="text"] {
   padding: 12px 15px;
   margin-top: 5px;
   border-radius: 12px;
-  border: 1px solid #444;
-  background: #1e1e2e;
-  color: #f5f5f5;
+  border: 1px solid #2a4a2a;
+  background: #111e11;
+  color: #f0f5f0;
   font-size: 1em;
   transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
 input[type="text"]:focus {
   outline: none;
-  border-color: #5a5aff;
-  background: #2a2a3e;
-  box-shadow: 0 0 0 3px rgba(90, 90, 255, 0.15);
+  border-color: #2db865;
+  background: #162816;
+  box-shadow: 0 0 0 3px rgba(45, 184, 101, 0.15);
 }
 
 /* ================= OPTIONS / BUTTONS ================= */
@@ -120,11 +120,11 @@ input[type="text"]:focus {
   flex: 1 1 calc(50% - 10px);
   padding: 14px;
   border-radius: 15px;
-  border: 1px solid #444;
+  border: 1px solid #2a4a2a;
   cursor: pointer;
   font-weight: bold;
-  background: #1e1e2e;
-  color: #f5f5f5;
+  background: #111e11;
+  color: #f0f5f0;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -139,7 +139,7 @@ input[type="text"]:focus {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(90,90,255,0.18) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(45, 184, 101, 0.18) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: inherit;
@@ -147,24 +147,24 @@ input[type="text"]:focus {
 
 .option:hover {
   transform: scale(1.05) translateY(-2px);
-  box-shadow: 0 8px 24px rgba(90, 90, 255, 0.25);
-  background: #26263a;
-  border-color: #5a5aff;
+  box-shadow: 0 8px 24px rgba(45, 184, 101, 0.25);
+  background: #172617;
+  border-color: #2db865;
 }
 
 .option:hover::after { opacity: 1; }
 
 .option:active {
   transform: scale(0.95);
-  box-shadow: 0 2px 8px rgba(90, 90, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(45, 184, 101, 0.15);
   transition: transform 0.08s ease, box-shadow 0.08s ease;
 }
 
 .option.selected {
   transform: scale(1.04) translateY(-1px);
-  box-shadow: 0 6px 22px rgba(90, 90, 255, 0.4);
-  background: #2e2e50;
-  border-color: #7a7aff;
+  box-shadow: 0 6px 22px rgba(45, 184, 101, 0.4);
+  background: #1a3020;
+  border-color: #55cc77;
 }
 
 .option.selected::after { opacity: 1; }
@@ -177,8 +177,8 @@ input[type="text"]:focus {
   border-radius: 25px;
   border: none;
   cursor: pointer;
-  background: #2e2e45;
-  color: #f5f5f5;
+  background: #1a3020;
+  color: #f0f5f0;
   font-size: 1em;
   margin-top: 10px;
   transition:
@@ -189,8 +189,8 @@ input[type="text"]:focus {
 
 #submitBtn:hover {
   transform: scale(1.04) translateY(-2px);
-  box-shadow: 0 8px 28px rgba(90, 90, 255, 0.3);
-  background: #3a3a5a;
+  box-shadow: 0 8px 28px rgba(45, 184, 101, 0.3);
+  background: #243e28;
 }
 
 #submitBtn:active {
@@ -203,7 +203,7 @@ input[type="text"]:focus {
 
 /* ================= PROGRESS BAR ================= */
 #progressContainer {
-  background: #222233;
+  background: #141e14;
   border-radius: 20px;
   height: 14px;
   width: 100%;
@@ -214,14 +214,14 @@ input[type="text"]:focus {
 #progressBar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #5a5aff, #aa55ff);
+  background: linear-gradient(90deg, #2db865, #55cc44);
   transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
-  box-shadow: 0 0 15px rgba(90, 90, 255, 0.5);
+  box-shadow: 0 0 15px rgba(45, 184, 101, 0.5);
 }
 
 /* ================= WARNING ================= */
 #warningMsg {
-  color: #ff5555;
+  color: #ff6666;
   font-weight: bold;
   margin-bottom: 10px;
   text-align: center;
@@ -247,16 +247,16 @@ input[type="text"]:focus {
 
 #thankYou p {
   font-size: 1em;
-  color: #ccc;
+  color: #8aaa8a;
 }
 
 /* ================= RESULTS SUMMARY ================= */
 #resultsSummary {
   margin-top: 20px;
   padding: 20px;
-  background: rgba(20, 20, 35, 0.85);
+  background: rgba(10, 18, 10, 0.85);
   border-radius: 20px;
-  border: 1px solid rgba(90, 90, 255, 0.15);
+  border: 1px solid rgba(45, 184, 101, 0.15);
   text-align: left;
 }
 
@@ -273,19 +273,19 @@ input[type="text"]:focus {
 .question-summary h3 {
   font-size: 1.05em;
   margin-bottom: 6px;
-  color: #e0e0f0;
+  color: #c0d8c0;
 }
 
 .dispatch-msg {
   font-size: 0.95em;
   font-weight: bold;
-  color: #55ffaa;
+  color: #55cc88;
   margin-bottom: 8px;
 }
 
 .user-answer-label {
   font-size: 0.9em;
-  color: #aaa;
+  color: #8aaa8a;
   margin-bottom: 6px;
 }
 
@@ -293,7 +293,7 @@ input[type="text"]:focus {
 .result-bar {
   position: relative;
   height: 22px;
-  background: #1e1e30;
+  background: #141e14;
   border-radius: 12px;
   margin-top: 5px;
   overflow: hidden;
@@ -301,7 +301,7 @@ input[type="text"]:focus {
 
 .result-fill {
   height: 100%;
-  background: linear-gradient(90deg, #ffaa55, #ff7733);
+  background: linear-gradient(90deg, #c8a84b, #e8c240);
   width: 0%;
   border-radius: 12px;
   transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
@@ -311,10 +311,10 @@ input[type="text"]:focus {
   padding-right: 8px;
   font-size: 0.82em;
   font-weight: bold;
-  color: #fff;
+  color: #1a1a0a;
   white-space: nowrap;
   min-width: 36px;
-  box-shadow: 0 0 12px rgba(255, 170, 85, 0.4);
+  box-shadow: 0 0 12px rgba(200, 168, 75, 0.4);
 }
 
 /* ================= RESPONSIVE ================= */
@@ -324,7 +324,7 @@ input[type="text"]:focus {
 
 /* ================= UNANSWERED ================= */
 .section.unanswered {
-  border: 2px solid #ff5555;
+  border: 2px solid #ff6666;
   border-radius: 15px;
   padding: 12px;
   transition: border 0.3s;
@@ -361,8 +361,8 @@ input[type="text"]:focus {
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(45, 184, 101, 0.12);
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 12px;
@@ -370,14 +370,14 @@ input[type="text"]:focus {
   animation: slideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-#intro-purpose       { animation-delay: 0.18s; }
-#intro-instructions  { animation-delay: 0.28s; }
+#intro-purpose         { animation-delay: 0.18s; }
+#intro-instructions    { animation-delay: 0.28s; }
 #intro-confidentiality { animation-delay: 0.38s; }
 
 .intro-icon {
   font-size: 0.7em;
   font-weight: bold;
-  color: #5a5aff;
+  color: #2db865;
   letter-spacing: 0.05em;
   flex-shrink: 0;
   margin-top: 4px;
@@ -387,7 +387,7 @@ input[type="text"]:focus {
 .intro-body h3 {
   font-size: 0.95em;
   font-weight: bold;
-  color: #c0c0e0;
+  color: #a0c8a0;
   margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -396,7 +396,7 @@ input[type="text"]:focus {
 .intro-body p,
 .intro-body ol {
   font-size: 0.92em;
-  color: #aaa;
+  color: #8aaa8a;
   font-weight: normal;
   line-height: 1.6;
 }
@@ -416,8 +416,8 @@ input[type="text"]:focus {
   border-radius: 25px;
   border: none;
   cursor: pointer;
-  background: linear-gradient(135deg, #3a3a6a, #5a5aff);
-  color: #f5f5f5;
+  background: linear-gradient(135deg, #1a3a22, #2db865);
+  color: #f0f5f0;
   font-size: 1em;
   margin-top: 18px;
   opacity: 0;
@@ -430,8 +430,8 @@ input[type="text"]:focus {
 
 #beginBtn:hover {
   transform: scale(1.04) translateY(-2px);
-  box-shadow: 0 8px 28px rgba(90, 90, 255, 0.4);
-  background: linear-gradient(135deg, #4a4a7a, #7a7aff);
+  box-shadow: 0 8px 28px rgba(45, 184, 101, 0.4);
+  background: linear-gradient(135deg, #224a2a, #3dca72);
 }
 
 #beginBtn:active {
@@ -461,14 +461,14 @@ input[type="text"]:focus {
   text-align: center;
   font-size: 2.2em;
   margin-bottom: 5px;
-  color: #f5f5f5;
-  text-shadow: 0 0 20px rgba(90, 90, 255, 0.3);
+  color: #f0f5f0;
+  text-shadow: 0 0 20px rgba(45, 184, 101, 0.3);
 }
 
 .form-subtitle {
   text-align: center;
   margin-bottom: 25px;
-  color: #aaa;
+  color: #8aaa8a;
   font-weight: 500;
 }
 
@@ -476,9 +476,9 @@ input[type="text"]:focus {
 #sharingStation {
   margin-top: 20px;
   padding: 20px;
-  background: rgba(20, 20, 35, 0.85);
+  background: rgba(10, 18, 10, 0.85);
   border-radius: 20px;
-  border: 1px solid rgba(90, 90, 255, 0.15);
+  border: 1px solid rgba(45, 184, 101, 0.15);
   opacity: 0;
   animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards;
 }
@@ -486,19 +486,19 @@ input[type="text"]:focus {
 .sharing-title {
   font-size: 1em;
   font-weight: bold;
-  color: #f5f5f5;
+  color: #f0f5f0;
   margin-bottom: 4px;
 }
 
 .sharing-sub {
   font-size: 0.88em;
-  color: #999;
+  color: #6a8a6a;
   font-weight: normal;
   margin-bottom: 14px;
 }
 
 .sharing-sub strong {
-  color: #7a7aff;
+  color: #55cc77;
   font-weight: bold;
 }
 
@@ -512,18 +512,18 @@ input[type="text"]:focus {
 #responseCount {
   font-size: 1.5em;
   font-weight: bold;
-  color: #55ffaa;
+  color: #55cc88;
   line-height: 1;
   transition: all 0.3s ease;
 }
 
 .sharing-goal {
   font-size: 0.85em;
-  color: #777;
+  color: #5a7a5a;
 }
 
 .sharing-bar-track {
-  background: #1a1a2e;
+  background: #121a12;
   border-radius: 12px;
   height: 12px;
   overflow: hidden;
@@ -533,24 +533,24 @@ input[type="text"]:focus {
 #sharingBar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #55ffaa, #00ccaa);
+  background: linear-gradient(90deg, #2db865, #55cc44);
   border-radius: 12px;
   transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-  box-shadow: 0 0 10px rgba(85, 255, 170, 0.35);
+  box-shadow: 0 0 10px rgba(45, 184, 101, 0.35);
 }
 
 /* Expanded after submit */
 #sharingActions {
   margin-top: 18px;
   padding-top: 16px;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid rgba(255,255,255,0.05);
   opacity: 0;
   animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .sharing-cta {
   font-size: 0.88em;
-  color: #999;
+  color: #6a8a6a;
   font-weight: normal;
   text-align: center;
   margin-bottom: 14px;
@@ -561,10 +561,10 @@ input[type="text"]:focus {
   padding: 13px;
   font-weight: bold;
   border-radius: 14px;
-  border: 1px solid rgba(90, 90, 255, 0.35);
+  border: 1px solid rgba(45, 184, 101, 0.35);
   cursor: pointer;
-  background: #252540;
-  color: #d0d0ff;
+  background: #162816;
+  color: #a0d0a0;
   font-size: 0.95em;
   letter-spacing: 0.03em;
   margin-bottom: 18px;
@@ -578,8 +578,8 @@ input[type="text"]:focus {
 
 #copyLinkBtn:hover {
   transform: scale(1.03) translateY(-1px);
-  box-shadow: 0 6px 20px rgba(90, 90, 255, 0.25);
-  background: #2e2e58;
+  box-shadow: 0 6px 20px rgba(45, 184, 101, 0.25);
+  background: #1e361e;
 }
 
 #copyLinkBtn:active {
@@ -587,9 +587,9 @@ input[type="text"]:focus {
 }
 
 #copyLinkBtn.copied {
-  background: #152b1e;
-  border-color: rgba(85, 255, 170, 0.4);
-  color: #55ffaa;
+  background: #142814;
+  border-color: rgba(85, 204, 119, 0.4);
+  color: #55cc77;
 }
 
 #qrContainer {
@@ -601,7 +601,7 @@ input[type="text"]:focus {
 
 .qr-label {
   font-size: 0.82em;
-  color: #777;
+  color: #5a7a5a;
   text-align: center;
   font-weight: normal;
 }
@@ -610,7 +610,7 @@ input[type="text"]:focus {
   width: 150px;
   height: 150px;
   border-radius: 12px;
-  border: 1px solid rgba(90, 90, 255, 0.2);
+  border: 1px solid rgba(45, 184, 101, 0.2);
   background: #fff;
   padding: 8px;
   display: block;
