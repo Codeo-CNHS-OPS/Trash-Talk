@@ -109,6 +109,11 @@ surveyForm.addEventListener('submit', async e => {
   thankYou.classList.remove('hidden');
   confetti();
   showResultsSummary();
+  // Fetch updated count and expand sharing station
+  fetch(SCRIPT_URL).then(r => r.json()).then(data => {
+    const total = Object.values(data['Q1']).reduce((a, b) => a + b, 0);
+    expandSharingStation(total + 1); // +1 optimistic for user's own submission
+  }).catch(() => expandSharingStation(1));
 });
 
 // Example post-submit percentages
@@ -182,3 +187,55 @@ function confetti() {
   }
   setTimeout(() => container.remove(), 5000);
 }
+
+
+
+// ================= SHARING STATION =================
+const SITE_URL = 'https://codeo-cnhs-ops.github.io/Trash-Talk/';
+const GOAL = 250;
+
+async function updateSharingProgress() {
+  try {
+    const res = await fetch(SCRIPT_URL);
+    const data = await res.json();
+    const total = Object.values(data['Q1']).reduce((a, b) => a + b, 0);
+    setSharingCount(total);
+  } catch (err) {
+    console.error('Failed to fetch response count:', err);
+  }
+}
+
+function setSharingCount(count) {
+  document.getElementById('responseCount').textContent = count;
+  const percent = Math.min((count / GOAL) * 100, 100);
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      document.getElementById('sharingBar').style.width = percent + '%';
+    }, 60);
+  });
+}
+
+function expandSharingStation(totalAfterSubmit) {
+  setSharingCount(totalAfterSubmit);
+  const actions = document.getElementById('sharingActions');
+  actions.classList.remove('hidden');
+  // Set QR code
+  const encoded = encodeURIComponent(SITE_URL);
+  document.getElementById('qrCode').src =
+    `https://chart.googleapis.com/chart?cht=qr&chl=${encoded}&chs=300x300&choe=UTF-8`;
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(SITE_URL).then(() => {
+    const btn = document.getElementById('copyLinkBtn');
+    btn.textContent = '✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '🔗 Copy Link';
+      btn.classList.remove('copied');
+    }, 2500);
+  });
+}
+
+// Load progress on page load
+updateSharingProgress();
